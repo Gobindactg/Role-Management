@@ -1,6 +1,25 @@
 @extends('Backend.layout.layouts')
 @section('content')
-
+<style>
+    .update:hover{
+        color:green;
+        transform:scale(1.3);
+       
+    }
+    .delete:hover{
+        color:red;
+        transform:scale(1.3);
+ 
+    }
+    .hoverBtn:hover{
+        background-color: green;
+    }
+    .settinHover:hover{
+        transform:scale(1.3);
+        color: yellow;
+        
+    }
+</style>
 <div class="main-content-inner">
     <div class="row">
         <!-- data table start -->
@@ -35,12 +54,12 @@
                                     <td>{{$role->created_at}}</td>
                                     <td>
                                         <div class="dropdown" >
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-cog" aria-hidden="true" style="font-size: 20px;"></i>
+                                            <button class="btn btn-info dropdown-toggle hoverBtn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-cog settinHover" aria-hidden="true" style="font-size: 20px;" ></i>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 5rem;">
-                                                <a class="dropdown-item btn btn-info" href="#">Update</a>
-                                                <a class="dropdown-item btn btn-danger" href="#">Delete</a>
+                                                <a class="dropdown-item update" href="#">Update</a>
+                                                <a class="dropdown-item delete" href="#">Delete</a>
                                             </div>
                                         </div>
                                     </td>

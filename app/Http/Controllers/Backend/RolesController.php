@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class RolesController extends Controller
 {
@@ -29,7 +30,9 @@ class RolesController extends Controller
     public function create()
     {
         $permissions = Permission::orderBy('id', 'desc')->get();
-        return view('Backend.Pages.Roles.create', compact('permissions'));
+        $permission_groups = User::getpermissionGroups();
+       
+        return view('Backend.Pages.Roles.create', compact('permissions', 'permission_groups'));
     }
 
     /**
@@ -40,14 +43,22 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        $role = Role::create(['name' => $request->name]);
-        // ['guard_name', 'web'];
+         // ['guard_name', 'web'];
         // $role = new Role();
         // $role->name = $request->name;
         // $role->guard_name = 'web';
         // $role->save();
 
         // $role = DB::table('roles')->where('name', $request->name)->first();
+        // validation data
+        $request->validate([
+            'name' => 'required|max:100|unique:roles'
+        ],[
+            'name.required' => 'Please give Role Name'
+        ]);
+
+        $role = Role::create(['name' => $request->name]);
+       
         $permissions = $request->input('permissions');
         if (!empty($permissions)) {
             $role->syncPermissions($permissions);
