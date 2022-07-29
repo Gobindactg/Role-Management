@@ -12,7 +12,7 @@
 </head>
 
 <body>
-     <!-- preloader area start -->
+    <!-- preloader area start -->
     <!-- <div id="preloader">
         <div class="loader"></div>
     </div> -->
@@ -25,22 +25,25 @@
         <!-- main content area start -->
         <div class="main-content">
             <!-- header area start -->
-           @include('Backend.Partial.header')
+            @include('Backend.Partial.header')
             <!-- header area end -->
 
             @yield('content')
 
             <!-- footer area start-->
             @include('Backend.Partial.footer')
-           
+
             <!-- footer area end-->
         </div>
         <!-- page container area end -->
         <!-- offset area start -->
-       @include('Backend.Partial.setting')
+       
+
+        @include('Backend.Partial.setting')
         <!-- offset area end -->
 
         @include('Backend.Partial.js')
+        @yield('script')
 </body>
 
 </html>

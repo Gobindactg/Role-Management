@@ -58,7 +58,7 @@
                                             <i class="fa fa-cog settinHover" aria-hidden="true" style="font-size: 20px;" ></i>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 5rem;">
-                                                <a class="dropdown-item update" href="#">Update</a>
+                                                <a class="dropdown-item update" href="{{route('roles.edit', $role->id)}}">Update</a>
                                                 <a class="dropdown-item delete" href="#">Delete</a>
                                             </div>
                                         </div>

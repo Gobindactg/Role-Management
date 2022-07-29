@@ -68,29 +68,6 @@
         <!-- data table end -->
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script>
-    $('#checkPermissionAll').click(function() {
-        if ($(this).is(':checked')) {
-            // check all the checkbox
-            $('input[type=checkbox]').prop('checked', true);
-        } else {
-            // uncheck all the checkbox
-            $('input[type=checkbox]').prop('checked', false);
-        }
-    })
-</script>
-<script>
-    function checkPermissionByGroup(className, checkThis){
-        const groupIdName = $("#"+checkThis.id);
-        const classCheckbox = $('.'+className+' input');
-        if ($(groupIdName).is(':checked')) {
-            // check all the checkbox
-            classCheckbox.prop('checked', true);
-        } else {
-            // uncheck all the checkbox
-            classCheckbox.prop('checked', false);
-        }
-    }
-</script>
+
+@include('Backend.Partial.customjs')
 @endsection

@@ -85,7 +85,12 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findById($id);
+        $permissions = Permission::all();
+        $all_permissions = Permission::all();
+        $permission_groups = User::getpermissionGroups();
+       
+        return view('Backend.Pages.Roles.edit', compact('role','permissions','all_permissions', 'permission_groups'));
     }
 
     /**
@@ -97,8 +102,21 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:100'
+        ],[
+            'name.required' => 'Please give Role Name'
+        ]);
+
+        $role = Role::findById($id);
+       
+        $permissions = $request->input('permissions');
+        if (!empty($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+        return back();
     }
+    
 
     /**
      * Remove the specified resource from storage.
