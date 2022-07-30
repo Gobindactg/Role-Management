@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('Backend.Partial.css')
     <!-- modernizr css -->
-    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="{{asset('assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 </head>
 
 <body>
@@ -24,6 +24,7 @@
         <!-- sidebar menu area end -->
         <!-- main content area start -->
         <div class="main-content">
+        
             <!-- header area start -->
             @include('Backend.Partial.header')
             <!-- header area end -->
@@ -41,7 +42,7 @@
 
         @include('Backend.Partial.setting')
         <!-- offset area end -->
-
+        @include('sweetalert::alert')
         @include('Backend.Partial.js')
         @yield('script')
 </body>

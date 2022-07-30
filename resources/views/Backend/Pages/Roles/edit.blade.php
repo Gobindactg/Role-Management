@@ -42,7 +42,7 @@
                         @csrf
                         <div class="form-group mt-3">
                             <label for="">Role Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $role->name }}" placeholder="Enter Your Role Name">
+                            <input type="text" class="form-control" id="name" name="name" readonly value="{{ $role->name }}" placeholder="Enter Your Role Name">
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="checkPermissionAll" value="1" {{ App\Models\User::roleHasPermissions($role, $all_permissions) ? 'checked' : ''}}>

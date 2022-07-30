@@ -13,6 +13,10 @@
                               
                             </li>
                             <li class="active">
+                                <a href="{{route('users.index')}}" aria-expanded="true"><i class="ti-dashboard"></i><span>User Management</span></a>
+                              
+                            <!-- </li>
+                            <li class="active">
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
                                 <ul class="collapse">
                                     <li class="active"><a href="index.html">ICO dashboard</a></li>
@@ -117,7 +121,7 @@
                                     </li>
                                     <li><a href="#">Item level (1)</a></li>
                                 </ul>
-                            </li>
+                            </li> -->
                         </ul>
                     </nav>
                 </div>
