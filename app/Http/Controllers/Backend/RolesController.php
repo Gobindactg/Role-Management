@@ -176,7 +176,7 @@ class RolesController extends Controller
 
     public function permission()
     {
-        $role = Permission::orderBy('id', 'asc')->select('group_name')->distinct()->get();
+        $role = Role::all();
         return view('Backend.Pages.Roles.createPermissions', compact('role'));
     }
     public function permissionStore(Request $request)

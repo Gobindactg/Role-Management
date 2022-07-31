@@ -20,7 +20,7 @@
                             <label for="">Permission Role</label>
                             <select name="permission" id="" class="form-select">                                                          
                                 @foreach($role as $roles)
-                                <option value="{{$roles->group_name}}">{{$roles->group_name}}</option>
+                                <option value="{{$roles->name}}">{{$roles->name}}</option>
                                 @endforeach
                             </select>
                         </div>

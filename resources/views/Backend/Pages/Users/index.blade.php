@@ -31,9 +31,11 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">Manage User</div>
+                        @if(Auth::guard('admin')->user()->can('user.create'))
                         <div class="col-md-6">
                             <a href="{{route('users.create')}}" class="btn btn-info" style="float:right ;">Create User</a>
                         </div>
+                        @endif
                     </div>
                     <h4 class="header-title">User List</h4>
                     <div class="data-tables">
@@ -68,7 +70,10 @@
                                                 <i class="fa fa-cog settinHover" aria-hidden="true" style="font-size: 20px;"></i>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 5rem;">
+                                            @if(Auth::guard('admin')->user()->can('user.edit'))
                                                 <a class="dropdown-item update" href="{{route('users.edit', $user->id)}}">Update</a>
+                                                @endif
+                                                @if(Auth::guard('admin')->user()->can('user.delete'))
                                                 <a class="dropdown-item delete" href="{{ route('users.destroy', $user->id) }}" onclick="event.preventDefault();   if (confirm('Do You Want Sure To Delete User?') == true) {document.getElementById('delete-form-{{ $user->id }}').submit();} else { 'Cancel' }; ">
                                                     Delete
                                                 </a>
@@ -76,6 +81,7 @@
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>

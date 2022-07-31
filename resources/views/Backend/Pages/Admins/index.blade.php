@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-md-6">Manage Admin</div>
                         <div class="col-md-6">
-                        @if(Auth::guard('admin')->user()->can('block.user'))
+                            @if(Auth::guard('admin')->user()->can('admin.create'))
                             <a href="{{route('admins.create')}}" class="btn btn-info" style="float:right ;">Create Admin</a>
                             @endif
                         </div>
@@ -57,10 +57,10 @@
                                     <td>{{$admin->name}}</td>
                                     <td>{{$admin->email}}</td>
                                     <td>
-                                    @foreach ($admin->roles as $role)
-                                            <span class="badge badge-info mr-1">
-                                                {{ $role->name }}
-                                            </span>
+                                        @foreach ($admin->roles as $role)
+                                        <span class="badge badge-info mr-1">
+                                            {{ $role->name }}
+                                        </span>
                                         @endforeach
                                     </td>
 
@@ -69,18 +69,23 @@
                                             <button class="btn btn-info dropdown-toggle hoverBtn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fa fa-cog settinHover" aria-hidden="true" style="font-size: 20px;"></i>
                                             </button>
-                                            @if(Auth::guard('admin')->user()->can('block.user'))
+
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 5rem;">
+                                                @if(Auth::guard('admin')->user()->can('admin.edit'))
                                                 <a class="dropdown-item update" href="{{route('admins.edit', $admin->id)}}">Update</a>
+                                                @endif
+                                                @if(Auth::guard('admin')->user()->can('admin.delete'))
                                                 <a class="dropdown-item delete" href="{{ route('admins.destroy', $admin->id) }}" onclick="event.preventDefault();   if (confirm('Do You Want Sure To Delete admin?') == true) {document.getElementById('delete-form-{{ $admin->id }}').submit();} else { 'Cancel' }; ">
                                                     Delete
                                                 </a>
+
                                                 <form id="delete-form-{{ $admin->id }}" action="{{ route('admins.destroy', $admin->id) }}" method="POST" style="display: none;">
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
+                                                @endif
                                             </div>
-                                            @endif
+
                                         </div>
                                     </td>
                                 </tr>

@@ -62,7 +62,7 @@ class AdminsController extends Controller
      */
     public function store(Request $request)
     {
-        if (is_null($this->user) || !$this->user->can('admin.store')) {
+        if (is_null($this->user) || !$this->user->can('admin.create')) {
             abort(403, 'Sorry !! You are Unauthorized to view any role !');
         }
          // Validation Data

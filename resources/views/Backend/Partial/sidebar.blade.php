@@ -112,18 +112,22 @@
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i> <span>Admin Management</span></a>
                         <ul class="collapse">
+                        @if(Auth::guard('admin')->user()->can('admin.view'))
                             <li><a href="{{route('admins.index')}}">All Admin</a></li>
-                            @if(Auth::guard('admin')->user()->can('block.user'))
-                            <li><a href="{{route('admins.create')}}">Create Admin</a></li>
                             @endif
+                            @if(Auth::guard('admin')->user()->can('admin.create'))
+                            <li><a href="{{route('admins.create')}}">Create Admin</a></li>
+                           @endif
                         </ul>
                     </li>
 
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i> <span>Role Management</span></a>
                         <ul class="collapse">
+                        @if(Auth::guard('admin')->user()->can('role.view'))
                             <li><a href="{{route('roles.index')}}">All Role</a></li>
-                            @if(Auth::guard('admin')->user()->can('block.user'))
+                            @endif
+                            @if(Auth::guard('admin')->user()->can('role.create'))
                             <li><a href="{{route('roles.create')}}">Create Role</a></li>
                             <li><a href="{{route('permission')}}">Create Permission</a></li>
                             @endif
@@ -133,8 +137,10 @@
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-align-left"></i> <span>User Management</span></a>
                         <ul class="collapse">
+                        @if(Auth::guard('admin')->user()->can('user.view'))
                             <li><a href="{{route('users.index')}}">All User</a></li>
-                            @if(Auth::guard('admin')->user()->can('block.user'))
+                            @endif
+                            @if(Auth::guard('admin')->user()->can('user.create'))
                             <li><a href="{{route('users.create')}}">Create User</a></li>
                             @endif
 

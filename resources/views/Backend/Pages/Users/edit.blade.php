@@ -75,7 +75,7 @@
                                                     <label for="password">Assign Roles</label>
                                                     <select name="roles[]" id="roles" class="form-control select2" multiple>
                                                         @foreach ($roles as $role)
-                                                        <option value="{{ $role->name }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                                        <option value="{{ $role->name }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }} || {{$role->guard_name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

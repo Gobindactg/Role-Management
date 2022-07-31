@@ -63,15 +63,16 @@
                                     </td>
 
                                     <td>
-                                    @if(Auth::guard('admin')->user()->can('block.user'))
+                                    
                                         <div class="dropdown">
                                             <button class="btn btn-info dropdown-toggle hoverBtn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fa fa-cog settinHover" aria-hidden="true" style="font-size: 20px;"></i>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 5rem;">
-                                            
+                                            @if(Auth::guard('admin')->user()->can('role.edit'))
                                                 <a class="dropdown-item update" href="{{route('roles.edit', $role->id)}}">Update</a>
-                                            
+                                            @endif
+                                            @if(Auth::guard('admin')->user()->can('role.delete'))
                                                 <a class="dropdown-item delete" href="{{ route('roles.destroy', $role->id) }}" onclick="event.preventDefault();   if (confirm('Do You Want Sure To Delete Role?') == true) {document.getElementById('delete-form-{{ $role->id }}').submit();} else { 'Cancel' }; ">
                                                     Delete
                                                 </a>
@@ -79,9 +80,10 @@
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
+                                                @endif
                                             </div>
                                         </div>
-                                        @endif
+                                       
                                     </td>
                                 </tr>
                                 @endforeach
