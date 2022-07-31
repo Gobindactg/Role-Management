@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 
-class UsersController extends Controller
+class AdminsController extends Controller
 {
     public $user;
 
@@ -31,12 +31,12 @@ class UsersController extends Controller
      */
     public function index()
     {
-        if (is_null($this->user) || !$this->user->can('user.view')) {
+        if (is_null($this->user) || !$this->user->can('admin.view')) {
             abort(403, 'Sorry !! You are Unauthorized to view any role !');
         }
-        $users = User::all();
-        $permission_groups = User::getpermissionGroups();
-        return view('Backend.Pages.users.index', compact('users'));
+        $admins = Admin::all();
+        $permission_groups = Admin::getpermissionGroups();
+        return view('Backend.Pages.admins.index', compact('admins'));
     }
 
     /**
@@ -46,12 +46,12 @@ class UsersController extends Controller
      */
     public function create()
     {
-        if (is_null($this->user) || !$this->user->can('user.create')) {
+        if (is_null($this->user) || !$this->user->can('admin.create')) {
             abort(403, 'Sorry !! You are Unauthorized to view any role !');
         }
         $roles  = Role::all();
 
-        return view('Backend.Pages.users.create', compact('roles'));
+        return view('Backend.Pages.admins.create', compact('roles'));
     }
 
     /**
@@ -62,29 +62,30 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        if (is_null($this->user) || !$this->user->can('user.create')) {
+        if (is_null($this->user) || !$this->user->can('admin.store')) {
             abort(403, 'Sorry !! You are Unauthorized to view any role !');
         }
          // Validation Data
          $request->validate([
             'name' => 'required|max:50',
-            'email' => 'required|max:100|email|unique:users',
+            'email' => 'required|max:100|email|unique:admins',
             'password' => 'required|min:6|confirmed',
         ]);
 
-        // Create New User
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
+        // Create New Admin
+        $admin = new Admin();
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->username = $request->username;
+        $admin->password = Hash::make($request->password);
+        $admin->save();
 
         if ($request->roles) {
-            $user->assignRole($request->roles);
+            $admin->assignRole($request->roles);
         }
 
-        session()->flash('success', 'User has been created !!');
-        return redirect()->route('users.index');
+        session()->flash('success', 'Admin has been created !!');
+        return redirect()->route('admins.index');
     }
 
     /**
@@ -106,12 +107,12 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        if (is_null($this->user) || !$this->user->can('user.edit')) {
+        if (is_null($this->user) || !$this->user->can('admin.edit')) {
             abort(403, 'Sorry !! You are Unauthorized to view any role !');
         }
-        $user = User::find($id);
+        $admin = Admin::find($id);
         $roles  = Role::all();
-        return view('Backend.Pages.users.edit', compact('user', 'roles'));
+        return view('Backend.Pages.admins.edit', compact('admin', 'roles'));
     }
 
     /**
@@ -123,33 +124,34 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (is_null($this->user) || !$this->user->can('user.update')) {
+        if (is_null($this->user) || !$this->user->can('admin.update')) {
             abort(403, 'Sorry !! You are Unauthorized to view any role !');
         }
-            // Create New User
-            $user = User::find($id);
+            // Create New Admin
+            $admin = Admin::find($id);
 
             // Validation Data
             $request->validate([
                 'name' => 'required|max:50',
-                'email' => 'required|max:100|email|unique:users,email,' . $id,
+                'email' => 'required|max:100|email|unique:admins,email,' . $id,
                 'password' => 'nullable|min:6|confirmed',
             ]);
     
     
-            $user->name = $request->name;
-            $user->email = $request->email;
+            $admin->name = $request->name;
+            $admin->email = $request->email;
+            $admin->username = $request->username;
             if ($request->password) {
-                $user->password = Hash::make($request->password);
+                $admin->password = Hash::make($request->password);
             }
-            $user->save();
+            $admin->save();
     
-            $user->roles()->detach();
+            $admin->roles()->detach();
             if ($request->roles) {
-                $user->assignRole($request->roles);
+                $admin->assignRole($request->roles);
             }
     
-            session()->flash('success', 'User has been updated !!');
+            session()->flash('success', 'Admin has been updated !!');
             return back();
     }
 
@@ -162,27 +164,31 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        if (is_null($this->user) || !$this->user->can('user.delete')) {
+        if (is_null($this->user) || !$this->user->can('admin.delete')) {
             abort(403, 'Sorry !! You are Unauthorized to view any role !');
         }
-        $user = User::find($id);
-        if (!is_null($user)) {
-            $user->delete();
+        $admin = Admin::find($id);
+        if (!is_null($admin)) {
+            $admin->delete();
         }
 
-        session()->flash('success', 'User has been deleted !!');
+        session()->flash('success', 'Admin has been deleted !!');
         return back();
     }
 
     public function permission(){
-        $user = User::all();
-        return view('Backend.Pages.users.createPermission', compact('user'));
+        $admin = Admin::all();
+        return view('Backend.Pages.admins.createPermission', compact('admin'));
     }
     public function permissionStore(Request $request){
-        $user = new permission();
-        $user->name = $request->name;
-        $user->group_name = $request->permission;
-        $user->save();
+        $admin = new permission();
+        $admin->name = $request->name;
+        $admin->group_name = $request->permission;
+        $admin->save();
         return redirect()->route('permission');
+    }
+
+    public function admin(){
+        return view('Backend.Pages.index');
     }
 }

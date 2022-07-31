@@ -1,6 +1,6 @@
 @extends('Backend.layout.layouts')
 @section('content')
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <div class="main-content-inner">
     <div class="row">
         <!-- data table start -->
@@ -14,6 +14,14 @@
                         <div class="form-group mt-3">
                             <label for="">Role Name</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Role Name">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="">Role Guard</label>
+                            <select name="guardName" id="" class="form-select" >
+                                <option value="">-- Select Guard Name --</option>
+                                <option value="admin">Admin (For Admin Controll)</option>
+                                <option value="web">User (For User Controll)</option>
+                            </select>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="checkPermissionAll" value="1">

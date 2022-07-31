@@ -24,11 +24,11 @@
         <!-- sidebar menu area end -->
         <!-- main content area start -->
         <div class="main-content">
-        
+           
             <!-- header area start -->
             @include('Backend.Partial.header')
             <!-- header area end -->
-
+            @include('Backend.Partial.user')
             @yield('content')
 
             <!-- footer area start-->
@@ -38,7 +38,7 @@
         </div>
         <!-- page container area end -->
         <!-- offset area start -->
-       
+
 
         @include('Backend.Partial.setting')
         <!-- offset area end -->
