@@ -4,6 +4,18 @@
 Login | Admin Panel
 @endsection
 
+<style>
+      .parsley-errors-list li {
+            list-style: none;
+            color: red;
+            font-family: tahoma;
+            font-style: italic;
+            padding-top: 1px;
+            margin-top: 1px;
+            font-weight: 700;
+            text-align: left;
+        }
+</style>
 @section('auth-content')
 <!-- login area start -->
 
@@ -16,17 +28,17 @@ Login | Admin Panel
             </div>
         </div>
         <div class="card-body">
-        @include('Backend.Partial.message')
-            <form method="POST" action="{{ route('admin.login.submit') }}">
+            @include('Backend.Partial.message')
+            <form method="POST" action="{{ route('admin.login.submit') }}" id="admin_validated">
                 @csrf
 
                 <div class="login-form-body">
-                   
+
                     <div class="row mb-3">
-                        <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                        <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address or username ') }}</label>
 
                         <div class="col-md-8">
-                            <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus required data-parsley-type="email" data-parsley-trigger="keyup" data-parsley-error-message="Email Is not Valid <span style='color:green'> Please Enter Correct Email</span>">
 
                             @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -87,6 +99,15 @@ Login | Admin Panel
 
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-<!-- login area end -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- login area end -->
+
+<script>
+    $(function() {
+        $("#admin_validated").parsley();
+
+    })
+</script>
 @endsection

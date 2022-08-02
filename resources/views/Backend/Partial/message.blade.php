@@ -17,7 +17,7 @@
 @if (Session::has('error'))
     <div class="alert alert-danger">
         <div>
-            <p>{{ Session::get('error') }}</p>
+            <p style="text-align:center ;">{{ Session::get('error') }}</p>
         </div>
     </div>
 @endif

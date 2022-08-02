@@ -6,6 +6,9 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\RolesController;
 use App\Http\Controllers\Backend\UsersController;
 use App\Http\Controllers\Backend\AdminsController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\TeacherController;
+use App\Http\Controllers\Backend\ClassinfoController;
 use App\Http\Controllers\Backend\sController;
 use App\Http\Controllers\Backend\auth\LoginController;
 
@@ -37,19 +40,22 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'admin', 'auth' => 'admin'], function () {
+// Login Routes
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('/login/submit', [LoginController::class, 'login'])->name('admin.login.submit');
+});
 
+Route::group(['prefix' => 'admin', 'auth' => 'admin'], function () {
     Route::resource('roles', RolesController::class);
     Route::resource('users', UsersController::class);
     Route::resource('admins', AdminsController::class);
-
-    // Login Routes
-    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('/login/submit', [LoginController::class, 'login'])->name('admin.login.submit');
-
+    Route::resource('blog', BlogController::class);
+    Route::resource('teacher', TeacherController::class);
+    Route::resource('class', ClassinfoController::class);
+    
     //log out route
     Route::post('/logout/submit', [LoginController::class, 'logout'])->name('admin.logout.submit');
-
 
     // password reset
     Route::get('/password/reset', [LoginController::class, 'showLinkRequestForm'])->name('admin.password.request');

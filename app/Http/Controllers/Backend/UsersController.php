@@ -31,9 +31,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        // if (is_null($this->user) || !$this->user->can('user.view')) {
-        //     abort(403, 'Sorry !! You are Unauthorized to view any role !');
-        // }
+        if (is_null($this->user) || !$this->user->can('user.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any role !');
+        }
         $users = User::all();
         $permission_groups = User::getpermissionGroups();
         return view('Backend.Pages.users.index', compact('users'));
@@ -46,9 +46,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        // if (is_null($this->user) || !$this->user->can('user.create')) {
-        //     abort(403, 'Sorry !! You are Unauthorized to view any role !');
-        // }
+        if (is_null($this->user) || !$this->user->can('user.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any role !');
+        }
         $roles  = Role::all();
 
         return view('Backend.Pages.users.create', compact('roles'));

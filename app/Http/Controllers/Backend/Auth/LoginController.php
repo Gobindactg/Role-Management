@@ -57,11 +57,11 @@ class LoginController extends Controller
             return redirect()->route('dashboard');
             // Search using username 
 
-        } else {
-            if (Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
+        } elseif (Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)){
                 session()->flash('success', 'Successully Logged in !');
                 return redirect()->route('dashboard');
             }
+            else{
             // error
             session()->flash('error', 'Invalid email and password');
             return back();

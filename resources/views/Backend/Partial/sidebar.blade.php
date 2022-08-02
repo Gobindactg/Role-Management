@@ -8,123 +8,25 @@
         <div class="menu-inner">
             <nav>
                 <ul class="metismenu" id="menu">
-                    <!-- <li class="active">
-                                <a href="{{route('roles.index')}}" aria-expanded="true"><i class="ti-dashboard"></i><span>Role Management</span></a>
-                              
-                            </li>
-                            <li class="active"> -->
-                    <!-- <a href="{{route('admins.index')}}" aria-expanded="true"><i class="ti-dashboard"></i><span>User Management</span></a> -->
-
-                    <!-- </li>
-                            <li class="active">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
-                                <ul class="collapse">
-                                    <li class="active"><a href="index.html">ICO dashboard</a></li>
-                                    <li><a href="index2.html">Ecommerce dashboard</a></li>
-                                    <li><a href="index3.html">SEO dashboard</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Sidebar
-                                        Types
-                                    </span></a>
-                                <ul class="collapse">
-                                    <li><a href="index.html">Left Sidebar</a></li>
-                                    <li><a href="index3-horizontalmenu.html">Horizontal Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Charts</span></a>
-                                <ul class="collapse">
-                                    <li><a href="barchart.html">bar chart</a></li>
-                                    <li><a href="linechart.html">line Chart</a></li>
-                                    <li><a href="piechart.html">pie chart</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-palette"></i><span>UI Features</span></a>
-                                <ul class="collapse">
-                                    <li><a href="accordion.html">Accordion</a></li>
-                                    <li><a href="alert.html">Alert</a></li>
-                                    <li><a href="badge.html">Badge</a></li>
-                                    <li><a href="button.html">Button</a></li>
-                                    <li><a href="button-group.html">Button Group</a></li>
-                                    <li><a href="cards.html">Cards</a></li>
-                                    <li><a href="dropdown.html">Dropdown</a></li>
-                                    <li><a href="list-group.html">List Group</a></li>
-                                    <li><a href="media-object.html">Media Object</a></li>
-                                    <li><a href="modal.html">Modal</a></li>
-                                    <li><a href="pagination.html">Pagination</a></li>
-                                    <li><a href="popovers.html">Popover</a></li>
-                                    <li><a href="progressbar.html">Progressbar</a></li>
-                                    <li><a href="tab.html">Tab</a></li>
-                                    <li><a href="typography.html">Typography</a></li>
-                                    <li><a href="form.html">Form</a></li>
-                                    <li><a href="grid.html">grid system</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-slice"></i><span>icons</span></a>
-                                <ul class="collapse">
-                                    <li><a href="fontawesome.html">fontawesome icons</a></li>
-                                    <li><a href="themify.html">themify icons</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
-                                    <span>Tables</span></a>
-                                <ul class="collapse">
-                                    <li><a href="table-basic.html">basic table</a></li>
-                                    <li><a href="table-layout.html">table layout</a></li>
-                                    <li><a href="datatable.html">datatable</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="maps.html"><i class="ti-map-alt"></i> <span>maps</span></a></li>
-                            <li><a href="invoice.html"><i class="ti-receipt"></i> <span>Invoice Summary</span></a></li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layers-alt"></i> <span>Pages</span></a>
-                                <ul class="collapse">
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="login2.html">Login 2</a></li>
-                                    <li><a href="login3.html">Login 3</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                    <li><a href="register2.html">Register 2</a></li>
-                                    <li><a href="register3.html">Register 3</a></li>
-                                    <li><a href="register4.html">Register 4</a></li>
-                                    <li><a href="screenlock.html">Lock Screen</a></li>
-                                    <li><a href="screenlock2.html">Lock Screen 2</a></li>
-                                    <li><a href="reset-pass.html">reset password</a></li>
-                                    <li><a href="pricing.html">Pricing</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-exclamation-triangle"></i>
-                                    <span>Error</span></a>
-                                <ul class="collapse">
-                                    <li><a href="404.html">Error 404</a></li>
-                                    <li><a href="403.html">Error 403</a></li>
-                                    <li><a href="500.html">Error 500</a></li>
-                                </ul>
-                            </li>-->
                     <li class="active">
                         <a href="{{route('dashboard')}}" aria-expanded="true"><i class="ti-dashboard"></i> <span>Admin Dashboard</span></a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i> <span>Admin Management</span></a>
                         <ul class="collapse">
-                        @if(Auth::guard('admin')->user()->can('admin.view'))
+                            @if(Auth::guard('admin')->user()->can('admin.view'))
                             <li><a href="{{route('admins.index')}}">All Admin</a></li>
                             @endif
                             @if(Auth::guard('admin')->user()->can('admin.create'))
                             <li><a href="{{route('admins.create')}}">Create Admin</a></li>
-                           @endif
+                            @endif
                         </ul>
                     </li>
 
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i> <span>Role Management</span></a>
                         <ul class="collapse">
-                        @if(Auth::guard('admin')->user()->can('role.view'))
+                            @if(Auth::guard('admin')->user()->can('role.view'))
                             <li><a href="{{route('roles.index')}}">All Role</a></li>
                             @endif
                             @if(Auth::guard('admin')->user()->can('role.create'))
@@ -137,12 +39,58 @@
                     <li>
                         <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-align-left"></i> <span>User Management</span></a>
                         <ul class="collapse">
-                        @if(Auth::guard('admin')->user()->can('user.view'))
+                            @if(Auth::guard('admin')->user()->can('user.view'))
                             <li><a href="{{route('users.index')}}">All User</a></li>
                             @endif
                             @if(Auth::guard('admin')->user()->can('user.create'))
                             <li><a href="{{route('users.create')}}">Create User</a></li>
                             @endif
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-align-left"></i> <span>Blog Management</span></a>
+                        <ul class="collapse">
+                            @if(Auth::guard('admin')->user()->can('blog.view'))
+                            <li><a href="{{route('blog.index')}}">All Blog</a></li>
+                            @endif
+                            @if(Auth::guard('admin')->user()->can('blog.create'))
+                            <li><a href="{{route('blog.create')}}">Create Blog</a></li>
+                            @endif
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-align-left"></i> <span>Teacher Management</span></a>
+                        <ul class="collapse">
+                            @if(Auth::guard('admin')->user()->can('teacher.view'))
+                            <li><a href="{{route('teacher.index')}}">All Teacher</a></li>
+                            @endif
+                            @if(Auth::guard('admin')->user()->can('teacher.create'))
+                            <li><a href="{{route('teacher.create')}}">Create teacher</a></li>
+                            @endif
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-align-left"></i> <span>class Management</span></a>
+                        <ul class="collapse">
+                            @if(Auth::guard('admin')->user()->can('class.view'))
+                            <li><a href="{{route('class.index')}}">All class</a></li>
+                            @endif
+                            @if(Auth::guard('admin')->user()->can('class.create'))
+                            <li><a href="{{route('class.create')}}">Create class</a></li>
+                            @endif
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-cog settinHover"></i> <span>Setting</span></a>
+                        <ul class="collapse">
+                            @if(Auth::guard('admin')->user()->can('class.view'))
+                            <li><a href="{{route('class.index')}}">School Profile Setting</a></li>
+                            @endif
+                         
 
                         </ul>
                     </li>

@@ -32,7 +32,10 @@ class RolesController extends Controller
     public function index()
     {
         if (is_null($this->user) || !$this->user->can('role.view')) {
-            abort(403, 'Sorry !! You are Unauthorized to view any role !');
+            
+            session()->flash('error','Sorry !! You are Unauthorized to view any role !');
+           
+            return redirect()->route('admin.login');
         }
         $roles = Role::all();
         return view('Backend.Pages.Roles.index', compact('roles'));
