@@ -29,7 +29,7 @@
 <div class="main-content-inner">
     <div class="row">
         <!-- data table start -->
-        <div class="col-12 mt-5">
+        <div class="col-12 mt-2" style="border:1px solid teal; padding:5px">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -54,6 +54,7 @@
                                     <th>Subject</th>
                                     <th>About</th>
                                     <th>Image</th>
+                                    <th>Status</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -69,7 +70,12 @@
                                     <td>{{$teacher->education_degree}}</td>
                                     <td>{{$teacher->subject}}</td>
                                     <td>{{$teacher->about}}</td>
-                                    <td>{{$teacher->image}}</td>
+                                    <td><img src="{{asset('TeacherImage/'.$teacher->image)}}" alt="" style="width: 70px;"></td>
+                                    <td>
+                                        @if($teacher->is_delete == 1) <span style="color:green">Active</span>
+                                        @else <span style="color:red">Deleted</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <button class="btn btn-info dropdown-toggle hoverBtn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,17 +84,23 @@
 
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 5rem;">
                                                 @if(Auth::guard('admin')->user()->can('teacher.edit'))
+                                                @if($teacher->is_delete == 1)
                                                 <a class="dropdown-item update" href="{{route('teacher.edit', $teacher->id)}}">Update</a>
+                                                @else <span style="color:red">This Profile Already Delete </span>
+
+                                                @endif
                                                 @endif
                                                 @if(Auth::guard('admin')->user()->can('teacher.delete'))
+                                                @if($teacher->is_delete == 1)
                                                 <a class="dropdown-item delete" href="{{ route('teacher.destroy', $teacher->id) }}" onclick="event.preventDefault();   if (confirm('Do You Want Sure To Delete admin?') == true) {document.getElementById('delete-form-{{ $teacher->id }}').submit();} else { 'Cancel' }; ">
                                                     Delete
                                                 </a>
-
                                                 <form id="delete-form-{{ $teacher->id }}" action="{{ route('teacher.destroy', $teacher->id) }}" method="POST" style="display: none;">
                                                     @method('DELETE')
                                                     @csrf
                                                 </form>
+
+                                                @endif
                                                 @endif
                                             </div>
 

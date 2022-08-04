@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use File;
 
 class TeacherController extends Controller
 {
@@ -37,9 +39,26 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
+
         $teachers =  new Teacher();
         $teachers->name = $request->name;
         $teachers->designation = $request->designation;
+        $teachers->email = $request->email;
+        $teachers->phone_number = $request->phone_number;
+        $teachers->education_degree = $request->education;
+        $teachers->subject = $request->subject;
+
+        if ($request->hasFile('image')) {
+            //   //insert that image
+
+            $image = $request->file('image');
+            $img = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('TeacherImage/' . $img);
+            Image::make($image)->save($location);
+            $teachers->image = $img;
+        }
+
+        $teachers->about = $request->about;
         $teachers->save();
 
         session()->flash('success', 'New Teacher Hass Been Added Succefully !!');
@@ -65,7 +84,9 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        //
+        $teacher = Teacher::find($id);
+
+        return view('Backend.Pages.Teacher.edit', compact('teacher'));
     }
 
     /**
@@ -77,7 +98,35 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $teachers = Teacher::find($id);
+        $teachers->name = $request->name;
+        $teachers->designation = $request->designation;
+        $teachers->email = $request->email;
+        $teachers->phone_number = $request->phone_number;
+        $teachers->education_degree = $request->education;
+        $teachers->subject = $request->subject;
+
+        if ($request->hasFile('image')) {
+           
+            //   to delete old image
+            if (File::exists('TeacherImage/' . $teachers->image)) {
+                File::delete('TeacherImage/' . $teachers->image);
+            }
+
+            //   //insert that image
+
+            $image = $request->file('image');
+            $img = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('TeacherImage/' . $img);
+            Image::make($image)->save($location);
+            $teachers->image = $img;
+        }
+
+        $teachers->about = $request->about;
+        $teachers->save();
+
+        session()->flash('success', 'New Teacher Update Been Added Succefully !!');
+        return redirect()->route('teacher.index');
     }
 
     /**
@@ -88,6 +137,10 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $teachers = Teacher::find($id);
+       $teachers->is_delete = 0;
+       $teachers->save();
+       session()->flash('success', 'Teacher Hass Been Added Succefully !!');
+       return redirect()->route('teacher.index');
     }
 }

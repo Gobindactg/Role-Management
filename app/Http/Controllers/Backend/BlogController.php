@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Auth;
-use Image;
+use Intervention\Image\Facades\Image;
 
 class BlogController extends Controller
 {
@@ -123,4 +123,5 @@ class BlogController extends Controller
     //     session()->flash('success', 'Blog has been deleted !!');
     //     return redirect()->route('blog.index');
     // }
+}
 }

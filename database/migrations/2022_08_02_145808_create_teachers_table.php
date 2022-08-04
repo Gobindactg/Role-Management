@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('education_degree')->nullable();
             $table->string('about')->nullable();
             $table->string('subject')->nullable();
+            $table->string('image')->nullable();
+            $table->tinyInteger('is_delete')->default(1);
             $table->integer('created_by')->nullable();
             $table->integer('delete_by')->nullable();
             $table->integer('user_id')->nullable();
