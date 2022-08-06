@@ -45,6 +45,7 @@
         @include('sweetalert::alert')
         @include('Backend.Partial.js')
         @yield('script')
+        
 </body>
 
 </html>

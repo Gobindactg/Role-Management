@@ -88,7 +88,7 @@
                         <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-cog settinHover"></i> <span>Setting</span></a>
                         <ul class="collapse">
                             @if(Auth::guard('admin')->user()->can('class.view'))
-                            <li><a href="{{route('class.index')}}">School Profile Setting</a></li>
+                            <li><a href="{{route('class.index')}}">Profile Setting</a></li>
                             @endif
                          
 

@@ -4,18 +4,7 @@
 Login | Admin Panel
 @endsection
 
-<style>
-      .parsley-errors-list li {
-            list-style: none;
-            color: red;
-            font-family: tahoma;
-            font-style: italic;
-            padding-top: 1px;
-            margin-top: 1px;
-            font-weight: 700;
-            text-align: left;
-        }
-</style>
+@include('Backend.Partial.validationcss')
 @section('auth-content')
 <!-- login area start -->
 
@@ -55,7 +44,6 @@ Login | Admin Panel
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                             @error('password')
-                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -99,11 +87,8 @@ Login | Admin Panel
 
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- login area end -->
-
+<script src="{{asset('js/jquery-3.6.0.js')}}"></script>
+<script src="{{asset('js/parsley.min.js')}}"></script>
 <script>
     $(function() {
         $("#admin_validated").parsley();

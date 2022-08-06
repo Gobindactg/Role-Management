@@ -52,7 +52,7 @@
                                     <th>Phone</th>
                                     <th>Education</th>
                                     <th>Subject</th>
-                                    <th>About</th>
+                                    <!-- <th>About</th> -->
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -69,7 +69,7 @@
                                     <td>{{$teacher->phone_number}}</td>
                                     <td>{{$teacher->education_degree}}</td>
                                     <td>{{$teacher->subject}}</td>
-                                    <td>{{$teacher->about}}</td>
+                                    <!-- <td>{{$teacher->about}}</td> -->
                                     <td><img src="{{asset('TeacherImage/'.$teacher->image)}}" alt="" style="width: 70px;"></td>
                                     <td>
                                         @if($teacher->is_delete == 1) <span style="color:green">Active</span>
