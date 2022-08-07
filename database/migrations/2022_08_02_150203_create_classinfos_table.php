@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('classinfos', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('group_name');
             $table->tinyInteger('is_delete')->default(1);
             $table->integer('created_by')->nullable();
             $table->integer('delete_by')->nullable();

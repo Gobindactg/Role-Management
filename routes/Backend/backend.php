@@ -8,7 +8,8 @@ use App\Http\Controllers\Backend\UsersController;
 use App\Http\Controllers\Backend\AdminsController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\TeacherController;
-use App\Http\Controllers\Backend\ClassinfoController;
+use App\Http\Controllers\Backend\ClassController;
+
 use App\Http\Controllers\Backend\sController;
 use App\Http\Controllers\Backend\auth\LoginController;
 
@@ -52,7 +53,7 @@ Route::group(['prefix' => 'admin', 'auth' => 'admin'], function () {
     Route::resource('admins', AdminsController::class);
     Route::resource('blog', BlogController::class);
     Route::resource('teacher', TeacherController::class);
-    Route::resource('class', ClassinfoController::class);
+    Route::resource('class', ClassController::class);
     
     //log out route
     Route::post('/logout/submit', [LoginController::class, 'logout'])->name('admin.logout.submit');
